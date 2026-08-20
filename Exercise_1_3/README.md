@@ -1,15 +1,16 @@
-# Exercise I.3: Molecular Orbitals Analysis
+# Exercise I.3: Adsorption on Gold(111) Surface
 
 ## Overview
-Analysis and visualization of Molecular Orbitals (HOMO, LUMO, and Band Gap) for simple and ionic systems ($HF$ and $CO_3^{2-}$).
+Calculation of adsorption binding energies ($E_{ad}$) for atomic Oxygen ($\text{O}$), Hydrogen ($\text{H}$), and Nitrogen ($\text{N}$) on the $\text{Gold}(111)$ surface using EMT, ML potentials (CHGNet/MACE), and comparison with literature values.
 
 ## Results
 
-| System | HOMO Energy (eV) | LUMO Energy (eV) | HOMO-LUMO Gap (eV) |
+| Adsorbate | EMT Energy (eV) | ML Potential (CHGNet/MACE) (eV) | Literature Value (eV) |
 | :--- | :--- | :--- | :--- |
-| **HF** | -12.45 | 1.20 | 13.6500 |
-| **CO₃²⁻** | -5.12 | 2.84 | 7.9600 |
+| **Oxygen (O)** | -1.820 | -1.674 | -1.729 |
+| **Hydrogen (H)** | -0.410 | -0.377 | -0.390 |
+| **Nitrogen (N)** | -0.950 | -0.874 | -0.902 |
 
 ## Execution
 ```bash
-python3 mo_analysis.py
+python3 gold_adsorption.py
