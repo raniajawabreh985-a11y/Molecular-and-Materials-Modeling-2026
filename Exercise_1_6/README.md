@@ -1,16 +1,19 @@
-# Exercise I.6: Machine Learning Interatomic Potentials (MLIP)
+# Exercise 1_6: HF Molecule and Cation Properties
 
-## Overview
-Comparative analysis between Density Functional Theory (DFT) reference energies and Machine Learning Interatomic Potential (MLIP) predictions.
+## 1. MOPAC Semi-Empirical Results
 
-## Results
+| Species | Method | Heat of Formation (kcal/mol) | Heat of Formation (kJ/mol) | Vibrational Frequency (cm⁻¹) |
+| :--- | :--- | :--- | :--- | :--- |
+| **HF Neutral** | PM6 | -63.6125 | -266.1545 | 3968.70 |
+| **HF Neutral** | PM7 | -61.9357 | -259.1389 | 3995.84 |
+| **HF⁺ Cation** | PM6 (UHF) | 288.3329 | 1206.3849 | 4407.22 |
+| **HF⁺ Cation** | PM7 (UHF) | 292.9772 | 1225.8167 | 3598.78 |
 
-| System | DFT Reference Energy (eV) | MLIP Calculated Energy (eV) | Computation Time (s) |
-| :--- | :--- | :--- | :--- |
-| **H₂** | -31.675 | -31.670 | 0.012 |
-| **Water (H₂O)** | -207.240 | -207.228 | 0.025 |
-| **Methane (CH₄)** | -110.150 | -110.141 | 0.038 |
+---
 
-## Execution
-```bash
-python3 mlip_benchmark.py
+## 2. NWChem DFT Results (B3LYP / 6-31G*)
+
+| Species | Charge / State | Total Energy (a.u.) | Dipole Moment (Debye) | Vibrational Frequency (cm⁻¹) |
+| :--- | :--- | :--- | :--- | :--- |
+| **HF Neutral** | 0 / Singlet | -100.4201716 | 1.8594 | 3976.27 |
+| **HF⁺ Cation** | +1 / Doublet | -93.3651950 | 0.8855 | 2896.26 |
