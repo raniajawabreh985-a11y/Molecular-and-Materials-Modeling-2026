@@ -1,4 +1,4 @@
-# Exercise 0_6: HF Molecule and Cation Properties
+# Exercise 1_6: HF Molecule and Cation Properties
 
 ## 1. MOPAC Semi-Empirical Results
 
@@ -16,4 +16,4 @@
 | Species | Charge / State | Total Energy (a.u.) | Dipole Moment (Debye) | Vibrational Frequency (cm⁻¹) |
 | :--- | :--- | :--- | :--- | :--- |
 | **HF Neutral** | 0 / Singlet | -100.4201716 | 1.8594 | 3976.27 |
-| **HF⁺ Cation** | +1 / Doublet | -99.8047886 | — | — |
+| **HF⁺ Cation** | +1 / Doublet | -93.3651950 | 0.8855 | 2896.26 |
