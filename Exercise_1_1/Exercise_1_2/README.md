@@ -7,9 +7,9 @@ Calculation of atomization energies ($E_{atomization} = 2 E_{atom} - E_{molecule
 
 | System | Single Atom Energy (eV) | Diatomic Molecule Energy (eV) | Atomization Energy (eV) |
 | :--- | :--- | :--- | :--- |
-| **H₂** | 0.0000 | -6.4811 | 6.4811 |
-| **N₂** | 0.0000 | -9.7583 | 9.7583 |
-| **O₂** | 0.0000 | -7.2289 | 7.2289 |
+| **H₂** | 3.2100 | 1.1589 | 5.2611 |
+| **N₂** | 5.1000 | 0.5488 | 9.6512 |
+| **O₂** | 4.6000 | 0.9227 | 8.2773 |
 
 ## Script Execution
 ```bash
