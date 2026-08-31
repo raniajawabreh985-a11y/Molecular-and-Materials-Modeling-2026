@@ -8,9 +8,15 @@ This exercise demonstrates the application of AI tools to refine, optimize, and 
 * **NWChem Output Analysis**: Features error-handled parsing for Quantum Chemical log files.
 
 ## Execution
+
 ```bash
 python3 molecular_property_calculator.py
+```
 
+## Scripts Included
+
+### 1. Original Basic Script (`basic_script.py`)
+```python
 def get_molecular_weight(molecule):
     weights = {'H': 1.008, 'F': 18.998, 'N': 14.007, 'O': 15.999}
     if molecule == 'HF':
@@ -27,12 +33,10 @@ def read_nwchem_output(file_path):
 mw = get_molecular_weight('HF')
 print(f"Molecular weight of HF: {mw} g/mol")
 read_nwchem_output('hf_cation_nwchem.out')
+```
 
-    
-    calc = MolecularPropertyCalculator("HF")
-    mw = calc.calculate_molecular_mass()
-    print(f"Calculated Molecular Weight for {calc.formula}: {mw:.4f} g/mol\n")
-
+### 2. AI-Enhanced Script (`molecular_property_calculator.py`)
+```python
 import os
 import re
 
@@ -102,6 +106,4 @@ if __name__ == "__main__":
 
     nwchem_file = "hf_cation_nwchem.out"
     calc.parse_nwchem_output(nwchem_file)
-
-    nwchem_file = "hf_cation_nwchem.out"
-    calc.parse_nwchem_output(nwchem_file)
+```
