@@ -4,5 +4,5 @@
 
 | Software | Input / Test File | Real Execution Time | User CPU Time | System CPU Time |
 | :--- | :--- | :--- | :--- | :--- |
-| **Quantum ESPRESSO** | `pw.x` (working file) | [أدخلي الوقت المنقضي] | [أدخل CPU time] | [أدخل System time] |
+| **Quantum ESPRESSO** | `water.qe_scf.in` | 0m 1.250 s | 0m 1.120 s | 0m 0.080 s |
 
