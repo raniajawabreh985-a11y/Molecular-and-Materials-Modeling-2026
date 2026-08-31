@@ -3,6 +3,7 @@
 
 ## Benchmark Timing Results
 
-| Software | Input / Test File | Real Execution Time | User CPU Time | System CPU Time |
-| :--- | :--- | :--- | :--- | :--- |
-| **MOPAC** | `dna_pm7_threads.mop` | **5m 49.604 s** | 5m 48.643 s | 0.072 s |
+| OpenMP Threads | Input / Test File | Real Execution Time | User CPU Time | System CPU Time |
+| :---: | :---: | :---: | :---: | :---: |
+| **1 Thread** | `dna_pm7_threads.mop` | 4m 12.821s | 4m 12.489s | 0m 0.061s |
+| **2 Threads** | `dna_pm7_threads.mop` | 4m 21.727s | 4m 21.418s | 0m 0.051s |
