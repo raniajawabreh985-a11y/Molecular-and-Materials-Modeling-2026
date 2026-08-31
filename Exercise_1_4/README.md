@@ -6,12 +6,13 @@ Demonstration of Atomic Simulation Environment (ASE) core routines, structural o
 ## Results
 
 | Optimization Parameter | Initial State | Optimized State |
-| :--- | :--- | :--- |
+| :--- | :---: | :---: |
 | **Total Potential Energy (eV)** | 0.4412 | 0.0000 |
 | **Nitrogen Interatomic Distance (Å)** | 1.1000 | 1.0978 |
 
-* **Challenge Verification:** Evaluated ASE subdirectory challenges and verified potential energy convergence conditions.
+- **Challenge Verification:** Evaluated ASE subdirectory challenges and verified potential energy convergence conditions.
 
 ## Execution
+
 ```bash
 python3 ase_demo_workflow.py
