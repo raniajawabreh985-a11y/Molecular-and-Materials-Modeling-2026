@@ -1,18 +1,9 @@
-# Exercise II.1: Silicon Crystal Lattice Optimization
+# Exercise II.1: Total Energy Calculation of the Silicon Unit Cell
 
 ## Overview
-Lattice parameter optimization and total energy calculations for Bulk Silicon (Si - Diamond structure) to determine the equilibrium unit cell volume.
+Total energy calculation of the bulk Silicon (Si) unit cell using Quantum ESPRESSO driven by ASE.
 
 ## Results
-
-| Lattice Constant $a$ (Å) | Total Energy (eV) |
-| :--- | :--- |
-| **5.000** | 1.1342 |
-| **5.200** | 0.3218 |
-| **5.400** | 0.0210 |
-| **5.431 (Equilibrium)** | -2.1400 |
-| **5.800** | 0.4521 |
-
-## Execution
-```bash
-python3 silicon_cell_calc.py
+* **Lattice Constant ($a$):** $5.43\text{ \AA}$
+* **Crystal Structure:** Diamond (FCC)
+* **Total Energy:** $-310.726498\text{ eV}$ (at $E_{\text{cut}} = 40\text{ Ry}$)
