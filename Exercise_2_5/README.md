@@ -21,6 +21,9 @@ Calculation of the electronic structure and Density of States (DOS) for Bulk Alu
 * **Fermi Energy ($E_F$):** `7.627100 eV`
 * **DOS Plot:** Computed and generated successfully as `al_dos_plot.png`.
 
+### Density of States (DOS) Plot
+![Aluminium DOS Plot](al_dos_plot.png)
+
 ## Execution & How to Run
 
 To run the calculation and generate the output log alongside the DOS plot, execute:
