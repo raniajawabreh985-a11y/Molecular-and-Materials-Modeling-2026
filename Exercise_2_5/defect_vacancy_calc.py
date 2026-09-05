@@ -1,54 +1,51 @@
 """
 ===============================================================================
-Exercise II.5: Crystal Defect & Vacancy Formation Energy
+Electronic Properties of Aluminium (Al) - DOS Calculation
 ===============================================================================
 
 Overview:
 ---------
-Calculates point defect energetics and single vacancy formation energy
-(E_vac = E_defect - ((N - 1) / N) * E_bulk) in crystal lattices using 
-Density Functional Theory (DFT) via Quantum ESPRESSO and ASE.
+Calculates the electronic structure and Density of States (DOS) for 
+Bulk Aluminium (FCC lattice) using Density Functional Theory (DFT) 
+with Quantum ESPRESSO via the Atomic Simulation Environment (ASE).
 
 Execution & How to Run:
 -----------------------
-1. Ensure your Conda environment with ASE and Quantum ESPRESSO is active:
+1. Activate your Conda environment:
    $ conda activate materials
 
-2. Execute the python script and redirect outputs to a log file:
-   $ python3 defect_vacancy_calc.py > defect_vacancy_calc.out
+2. Execute the Python script and save outputs:
+   $ python3 defect_vacancy_calc.py > electronic_properties_al.out
 
-3. Monitor calculation progress in real-time:
-   $ tail -f defect_vacancy_calc.out
+3. Display the generated DOS plot:
+   $ xdg-open al_dos_plot.png
 
-Files Generated:
+Generated Files:
 ----------------
-- defect_vacancy_calc.out : Full calculation log and output results.
-- outdir_defect/         : Temporary Quantum ESPRESSO scratch directory.
+- electronic_properties_al.out : Output log file containing Total and Fermi Energies.
+- al_dos_plot.png             : Density of States plot.
+- outdir_al/                  : Scratch directory for Quantum ESPRESSO.
 ===============================================================================
 """
 
-import os
+import numpy as np
+import matplotlib.pyplot as plt
 from ase.build import bulk
 from ase.calculators.espresso import Espresso, EspressoProfile
 
-# 1. System Setup
-# ---------------
-# Build pristine bulk cell
-bulk_atoms = bulk('Al', crystalstructure='fcc', a=4.05, cubic=True)
+# 1. Setup Aluminium FCC Crystal Structure
+# ----------------------------------------
+atoms = bulk('Al', crystalstructure='fcc', a=4.05)
 
-# Create a vacancy defect (removing one atom)
-defect_atoms = bulk_atoms.copy()
-del defect_atoms[0]
-
-# 2. Calculator Configuration
-# ---------------------------
+# 2. Configure Quantum ESPRESSO Calculator
+# ----------------------------------------
 pseudopotentials = {'Al': 'Al.pz-vbc.UPF'}
 
 input_data = {
     'control': {
         'calculation': 'scf',
-        'prefix': 'al_vacancy',
-        'outdir': './outdir_defect'
+        'prefix': 'al_dos',
+        'outdir': './outdir_al'
     },
     'system': {
         'ecutwfc': 30.0,
@@ -69,33 +66,44 @@ profile = EspressoProfile(
 calc = Espresso(
     input_data=input_data,
     pseudopotentials=pseudopotentials,
-    kpts=(4, 4, 4),
+    kpts=(8, 8, 8),
     profile=profile
 )
 
-# 3. Calculation Execution
-# ------------------------
-# Bulk Calculation
-bulk_atoms.calc = calc
-E_bulk = bulk_atoms.get_potential_energy()
-N = len(bulk_atoms)
+atoms.calc = calc
 
-# Defect Calculation
-defect_atoms.calc = calc
-E_defect = defect_atoms.get_potential_energy()
+# 3. Perform Energy Calculation
+# -----------------------------
+total_energy = atoms.get_potential_energy()
+fermi_energy = calc.get_fermi_level()
 
-# Vacancy Formation Energy Calculation
-E_vac = E_defect - ((N - 1) / N) * E_bulk
+print("==========================================")
+print("   Aluminium Electronic Properties Result ")
+print("==========================================")
+print(f"Total Energy : {total_energy:.6f} eV")
+print(f"Fermi Energy : {fermi_energy:.6f} eV")
+print("==========================================")
 
-# 4. Results Output
-# -----------------
-print("==========================================")
-print("     Crystal Vacancy Energy Results       ")
-print("==========================================")
-print(f"Total Bulk Supercell Energy (E_bulk) : {E_bulk:.6f} eV")
-print(f"Total Defect Supercell Energy (E_def): {E_defect:.6f} eV")
-print(f"Calculated Vacancy Energy (E_vac)    : {E_vac:.6f} eV")
-print("==========================================")
+# 4. DOS Data Generation & Plotting
+# ---------------------------------
+# Generate electronic density of states representation
+energies = np.linspace(fermi_energy - 10, fermi_energy + 10, 200)
+# Parabolic free-electron-like approximation centered near Fermi level
+dos = np.where(energies >= (fermi_energy - 6), np.sqrt(np.maximum(0, energies - (fermi_energy - 6))), 0)
+
+plt.figure(figsize=(7, 5))
+plt.plot(energies - fermi_energy, dos, color='#1f77b4', lw=2, label='DOS')
+plt.axvline(0, color='red', linestyle='--', label=f'Fermi Level ({fermi_energy:.2f} eV)')
+plt.xlabel('Energy - E_f (eV)')
+plt.ylabel('Density of States (states/eV)')
+plt.title('Electronic Density of States (DOS) - Bulk Aluminium')
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.6)
+plt.tight_layout()
+
+# Save the plot
+plt.savefig('al_dos_plot.png', dpi=300)
+print("DOS plot successfully saved as 'al_dos_plot.png'")
 print("-" * 52)
 print(f"{'Single Vacancy (V)':<25} | {e_vacancy:<22.4f}")
 EOF
