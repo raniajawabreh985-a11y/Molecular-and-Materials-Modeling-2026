@@ -56,7 +56,7 @@ with open('scf.out', 'r') as f:
             total_energy_ev = total_energy_ry * 13.605698066
             print(f"  Total energy: {total_energy_ev:.6f} eV")
 
-# --- 3. Step 2: Löwdin Charges Analysis ---
+# --- 3. Step 2: Löwdin Charges & Charge Density Analysis ---
 print("\n[Phase A.] Extracting charge density and Löwdin charges from SCF calculation...")
 
 print("\n1. Calculating charge density from SCF...")
@@ -86,7 +86,6 @@ print("\n2. Running projwfc.x on SCF...")
 projwfc_scf_input = f"""
 &PROJWFC
   prefix = '{prefix}'
-  outdir = '{outdir}'
   outdir = '{outdir}'
   lsym = .true.
   filpdos = 'scf_pdos'
@@ -186,8 +185,8 @@ with open('projwfc_nscf.in', 'w') as f:
 subprocess.run(projwfc_command.format(input_file='projwfc_nscf.in', output_file='projwfc_nscf.out'), shell=True, check=True)
 print("   projwfc.x completed successfully")
 
-# Organize PDOS files
-subprocess.run("mv pdos.pdos* pdos_results/ 2>/dev/null", shell=True)
+# Organize PDOS files into designated directory
+subprocess.run("mv pdos.pdos* projections.projwfc_up pdos_results/ 2>/dev/null", shell=True)
 
 print("\n=== Electronic Structure Analysis Complete ===")
 print("Generated files:")
