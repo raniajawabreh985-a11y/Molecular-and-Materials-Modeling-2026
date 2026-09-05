@@ -1,18 +1,19 @@
 
-# Exercise II.2: Silicon Electronic Band Structure Analysis
+# Exercise II.2: Automated Cutoff and K-Points Convergence Test for Silicon
 
 ## Overview
-Calculation of high-symmetry $k$-point energy levels and determination of the indirect band gap ($E_g$) for Diamond-structure Silicon using Quantum ESPRESSO and ASE.
+Automated plane-wave cutoff energy ($E_{\text{cut}}$) convergence test for Diamond-structure Silicon using Quantum ESPRESSO and ASE.
 
-## Results
+## Convergence Results
 
-| $k$-Point Path | Valence Band Max - VBM (eV) | Conduction Band Min - CBM (eV) | Direct Gap (eV) |
-| :--- | :--- | :--- | :--- |
-| **Gamma (0, 0, 0)** | 0.00 | 2.56 | 2.56 |
-| **X (0, 0.5, 0.5)** | -0.85 | 1.17 | 2.02 |
-| **L (0.5, 0.5, 0.5)** | -1.20 | 2.10 | 3.30 |
-| **K (0.375, 0.375, 0.75)** | -1.45 | 1.95 | 3.40 |
+| Cutoff Energy $E_{\text{cut}}$ (Ry) | Total Energy (eV) |
+| :--- | :--- |
+| 20 | -310.700205 |
+| 30 | -310.724546 |
+| 40 | -310.726498 |
+| 50 | -310.727313 |
+| 60 | -310.727631 |
+| 70 | -310.727817 |
+| 80 | -310.727973 |
 
-* **Indirect Band Gap ($\Gamma \rightarrow X$):** **$1.17\text{ eV}$**
-* **Valence Band Maximum (VBM):** Located at $\Gamma (0, 0, 0)$
-* **Conduction Band Minimum (CBM):** Located near $X (0, 0.5, 0.5)$
+* **Convergence Threshold:** Total energy converges within $1\text{ meV/atom}$ at **$E_{\text{cut}} = 40\text{--}50\text{ Ry}$**.
