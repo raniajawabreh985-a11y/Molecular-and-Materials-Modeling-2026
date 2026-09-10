@@ -23,4 +23,26 @@ python3 relaxation.py
 python3 energy_h.py
 python3 energy_c.py
 
+H@C8 Relaxation Output:
+-----------------------
+Total Energy                : -1319.069282 eV
+ASE-style max force (norm)  : 0.003278 eV/A
+QE-style max force          : 0.003278 eV/A
+Pressure                    : 26.532360 kbar
+
+H Atom SCF Output:
+------------------
+Total energy                : -12.559509 eV
+Fermi level                 : -6.462900 eV
+
+C8 Surface SCF Output:
+----------------------
+Total energy                : -1303.645873 eV
+Fermi level                 : -1.813400 eV
+
+Binding Energy Calculation:
+---------------------------
+Binding energy = E(C8) + E(H) - E(H@C8)
+Binding energy = -1303.645873 - 12.559509 - (-1319.069282) eV
+Binding energy = 2.8639 eV
 
