@@ -16,7 +16,9 @@ Optimizes the position of the H atom adsorbed on the C8 graphene surface.
   * **Output:**
     Total Energy                : -1319.069282 eV
 ASE-style max force (norm)  : 0.003278 eV/A
+
 QE-style max force          : 0.003278 eV/A
+
 Pressure                    : 26.532360 kbar
 
 ---
@@ -30,6 +32,7 @@ Calculates the total energy of an isolated H atom in a box.
 
 * **Output:** 
 Total energy                : -12.559509 eV
+
 Fermi level                 : -6.462900 eV
 
 ---
@@ -44,7 +47,7 @@ Calculates the total energy of the pristine C8 surface without adsorption.
 * **Output:**
  Total energy                : -1303.645873 eV
 
-Fermi level                 : -1.813400 eV
+ Fermi level                 : -1.813400 eV
 
  ---
 
@@ -52,7 +55,9 @@ Fermi level                 : -1.813400 eV
 
 ### Energy Summary
 * **E(H@C8):** -1319.069282 eV
+  
 * **E(C8):** -1303.645873 eV
+  
 * **E(H):** -12.559509 eV
 
 ### Binding Energy Calculation
