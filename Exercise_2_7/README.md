@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # Exercise II.7: Work Function of Graphene
 
 ## Overview
@@ -31,4 +30,5 @@ $$\text{Work Function} = 0.185449 - (-1.717400) = 1.902849 \text{ eV}$$
 The planar-averaged electrostatic potential distribution across the $z$-axis is saved in `potential_plot.png`.
 
 ## Execution
-python3 work_function.py
+```bash
+python3 work_function.py > work_function.out
