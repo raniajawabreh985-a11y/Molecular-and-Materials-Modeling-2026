@@ -23,6 +23,7 @@ python3 relaxation.py
 python3 energy_h.py
 python3 energy_c.py
 
+
 H@C8 Relaxation Output:
 -----------------------
 Total Energy                : -1319.069282 eV
