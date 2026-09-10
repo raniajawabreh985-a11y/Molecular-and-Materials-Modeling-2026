@@ -1,18 +1,33 @@
-# Exercise II.7: Optical Properties & Dielectric Function
+cat << 'EOF' > README.md
+# Exercise II.7: Work Function of Graphene
 
 ## Overview
-Calculation of the frequency-dependent dielectric function ($\epsilon(\omega) = \epsilon_1 + i\epsilon_2$) and optical absorption spectrum for bulk silicon.
+Calculation of the electrostatic potential profile and determination of the work function ($WF$) for a pristine monolayer graphene slab using Quantum ESPRESSO (`pw.x`, `pp.x`, and `average.x`).
+
+## Calculation Parameters
+| Parameter | Value |
+| :--- | :--- |
+| **System** | Monolayer Graphene Slab |
+| **Plane-wave cutoff (ecutwfc)** | 40 Ry |
+| **Charge density cutoff (ecutrho)** | 320 Ry |
+| **K-point mesh** | $12 \times 12 \times 1$ |
+| **Vacuum Spacing** | ~15 Å ($z$-axis) |
 
 ## Results
 
-| Photon Energy (eV) | $\text{Re}(\epsilon)$ | $\text{Im}(\epsilon)$ |
-| :--- | :--- | :--- |
-| **1.0** | 12.10 | 0.00 |
-| **2.0** | 13.50 | 0.20 |
-| **3.0** | 15.20 | 4.50 |
-| **4.0** | 8.40 | 22.80 |
-| **5.0** | 2.10 | 11.30 |
+### Key Energy Levels
+| Parameter | Value (eV) |
+| :--- | :--- |
+| **Fermi Energy ($E_{Fermi}$)** | -1.717400 |
+| **Vacuum Potential ($V_{vacuum}$)** | 0.185449 |
+| **Calculated Work Function ($WF$)** | **1.902849** |
+
+## Formula
+$$\text{Work Function} (WF) = V_{\text{vacuum}} - E_{\text{Fermi}}$$
+
+$$\text{Work Function} = 0.185449 - (-1.717400) = 1.902849 \text{ eV}$$
+
+## Output Plot
+The planar-averaged electrostatic potential distribution across the $z$-axis is saved in `potential_plot.png`.
 
 ## Execution
-```bash
-python3 optical_properties_calc.py
