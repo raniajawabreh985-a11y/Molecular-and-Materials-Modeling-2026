@@ -45,9 +45,6 @@ print(f"Fermi Energy     (E_Fermi)  : {fermi_energy:.4f} eV")
 print(f"Work Function    (WF)       : {work_function:.4f} eV")
 
 # 5. Plot Electrostatic Potential
-if os.path.exists('gnuplot') or subprocess.run('which gnuplot', shell=True, stdout=subprocess.DEVNULL).returncode == 0:
+if subprocess.run('which gnuplot', shell=True, stdout=subprocess.DEVNULL).returncode == 0:
     subprocess.run('gnuplot plot_potential.gp 2>/dev/null', shell=True)
     print("\nPlot saved successfully as potential_plot.png")
-EOF
-
-python3 optical_properties_calc.py
