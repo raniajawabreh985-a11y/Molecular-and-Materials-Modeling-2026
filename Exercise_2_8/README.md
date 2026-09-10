@@ -43,6 +43,7 @@ Calculates the total energy of the pristine C8 surface without adsorption.
 
 * **Output:**
  Total energy                : -1303.645873 eV
+
 Fermi level                 : -1.813400 eV
 
  ---
