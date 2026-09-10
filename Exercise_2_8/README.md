@@ -1,17 +1,26 @@
-# Exercise II.8: Electron-Phonon Coupling Analysis
+# Adsorption on the surface
 
-## Overview
-Assessment of electron-phonon matrix elements and evaluation of temperature-dependent band gap renormalization ($\Delta E_g(T)$).
+Adsorption of H atom on a piece of graphene (C8).
 
-## Results
+Initial structures are read from vasp geometry files. The H atom is placed into a middle of cubic box.
 
-| Temperature (K) | Band Gap Shift $\Delta E_g$ (eV) |
-| :--- | :--- |
-| **0** | 0.000 |
-| **100** | -0.012 |
-| **300** | -0.048 |
-| **500** | -0.095 |
+## step 1
+
+`relaxation.py` - optimizes the H@C8 geometry
+
+## step 2
+
+`energy_h.py` - computes the energy of H atom
+
+## step 3
+
+`energy_c.py` - computes the energy of C8 surface
 
 ## Execution
+
 ```bash
-python3 electron_phonon_calc.py
+python3 relaxation.py
+python3 energy_h.py
+python3 energy_c.py
+
+
