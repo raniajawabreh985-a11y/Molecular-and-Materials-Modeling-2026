@@ -31,3 +31,4 @@ $$\text{Work Function} = 0.185449 - (-1.717400) = 1.902849 \text{ eV}$$
 The planar-averaged electrostatic potential distribution across the $z$-axis is saved in `potential_plot.png`.
 
 ## Execution
+python3 optical_properties_calc.py
