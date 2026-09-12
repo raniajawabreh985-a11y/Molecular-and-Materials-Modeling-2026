@@ -1,75 +1,69 @@
-# Adsorption of Hydrogen on Graphene (C8)
+# Adsorption of Hydrogen and Mercury on Graphene Substrates
 
-This project models the adsorption of a Hydrogen (H) atom on a graphene slab (C8) using Quantum ESPRESSO via ASE.
-
----
-
-## Workflow & Methodology
-
-### Step 1: Geometry Optimization (H@C8)
-Optimizes the position of the H atom adsorbed on the C8 graphene surface.
-
-* **Script:** `relaxation.py`
-* **Execution:**
-  python3 relaxation.py
-
-  * **Output:**
-    Total Energy                : -1319.069282 eV
-ASE-style max force (norm)  : 0.003278 eV/A
-
-QE-style max force          : 0.003278 eV/A
-
-Pressure                    : 26.532360 kbar
+This repository presents Quantum ESPRESSO and ASE simulation results for the adsorption energetics of Hydrogen ($\text{H}$) and Mercury ($\text{Hg}$) atoms on graphene substrates ($\text{C}_8$ and $\text{C}_{18}$).
 
 ---
 
-### Step 2: Isolated Hydrogen Atom SCF (H)
-Calculates the total energy of an isolated H atom in a box.
+## Summary of Results
 
-* **Script:** `energy_h.py`
-* **Execution:**
- python3 energy_h.py
-
-* **Output:** 
-Total energy                : -12.559509 eV
-
-Fermi level                 : -6.462900 eV
+| System / Exercise | $E_{\text{slab}}$ (eV) | $E_{\text{adsorbate}}$ (eV) | $E_{\text{total}}$ (eV) | Binding Energy (eV) | Notes / Condition |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **1. Primary Exercise ($\text{H@C}_8$)** | `-1288.941908` | `-12.559509` | `-1319.069282` | **17.5679** | Unrelaxed $\text{C}_8$ slab ($ecutwfc = 30\text{ Ry}$) |
+| **2. Challenge 1 (Relaxed $\text{C}_8$)** | `-1288.937073` | `-12.559509` | `-1319.069282` | **17.5727** | Fully relaxed $\text{C}_8$ slab ($ecutwfc = 30\text{ Ry}$) |
+| **3. Challenge 2 ($ecutwfc$ Convergence)**| `-1297.847139` | `-12.536428` | `-1313.276897` | **2.8933** | Cutoff test at $ecutwfc = 40\text{ Ry}$ |
+| **4. Challenge 3 ($\text{Hg@C}_{18}$)** | `-2915.479553` | `-4525.061570` | `-7441.141316` | **0.6002** | Larger $\text{C}_{18}$ substrate ($ecutwfc = 30\text{ Ry}$) |
 
 ---
 
-### Step 3: Pristine Graphene Slab SCF (C8)
-Calculates the total energy of the pristine C8 surface without adsorption.
+## Detailed Breakdown & Methodology
 
-* **Script:** `energy_c.py`
-* **Execution:**
- python3 energy_c.py
+### 1. Primary Exercise: $\text{H}$ Adsorption on $\text{C}_8$
 
-* **Output:**
- Total energy                : -1303.645873 eV
+Calculated the binding energy of a single Hydrogen atom on a $\text{C}_8$ graphene surface using standard parameters ($ecutwfc = 30.0\text{ Ry}$).
 
- Fermi level                 : -1.813400 eV
+$$\text{Binding Energy} = E(\text{C}_8) + E(\text{H}) - E(\text{H@C}_8)$$
 
- ---
-
-## Summary of Results & Binding Energy
-
-### Energy Summary
-* **E(H@C8):** -1319.069282 eV
-  
-* **E(C8):** -1303.645873 eV
-  
-* **E(H):** -12.559509 eV
-
-### Binding Energy Calculation
-Binding Energy = E(C8) + E(H) - E(H@C8)
-
-Binding Energy = -1303.645873 + (-12.559509) - (-1319.069282) = **2.8639 eV**
+| Component | Description | Energy (eV) |
+| :--- | :--- | :---: |
+| $E(\text{C}_8)$ | Unrelaxed $\text{C}_8$ graphene slab | `-1288.941908` |
+| $E(\text{H})$ | Isolated Hydrogen atom | `-12.559509` |
+| $E(\text{H@C}_8)$ | Total combined adsorption system | `-1319.069282` |
+| **$E_{\text{binding}}$** | **Calculated Binding Energy** | **`17.5679 eV`** |
 
 ---
 
-## Challenge Exercises
+### 2. Challenge 1: Geometry Optimization of $\text{C}_8$ Substrate
 
-* Modify the Python script to perform the relaxation of the C8 slab and recalculate the adsorption energy.
-* Increase the `ecutwfc` parameter to evaluate convergence of the H@C8 binding energy.
-* Enlarge the slab to C18 (similar to Hg adsorption) and evaluate the binding energy changes.
+Optimized the atomic positions of the isolated $\text{C}_8$ slab using the BFGS algorithm ($f_{\text{max}} < 0.05\text{ eV/\AA}$).
+
+| Parameter | Value |
+| :--- | :---: |
+| **Relaxed $E(\text{C}_8)$** | `-1288.937073 eV` |
+| **Updated Binding Energy** | **`17.5727 eV`** |
+
+---
+
+### 3. Challenge 2: Plane-Wave Cutoff Convergence ($ecutwfc = 40.0\text{ Ry}$)
+
+Evaluated energy convergence by increasing the wave-function kinetic energy cutoff from $30.0\text{ Ry}$ to $40.0\text{ Ry}$.
+
+| System Component | Energy at $40\text{ Ry}$ (eV) |
+| :--- | :---: |
+| $E(\text{C}_8)$ | `-1297.847139` |
+| $E(\text{H})$ | `-12.536428` |
+| $E(\text{H@C}_8)$ | `-1313.276897` |
+| **New Binding Energy** | **`2.8933 eV`** |
+
+---
+
+### 4. Challenge 3: Mercury ($\text{Hg}$) Adsorption on $\text{C}_{18}$ Substrate
+
+Extended the adsorption study to a larger $\text{C}_{18}$ graphene supercell interacting with a single Mercury atom.
+
+| Component | Description | Energy (eV) |
+| :--- | :--- | :---: |
+| $E(\text{C}_{18})$ | Pure $\text{C}_{18}$ substrate | `-2915.479553` |
+| $E(\text{Hg})$ | Isolated Mercury atom | `-4525.061570` |
+| $E(\text{Hg@C}_{18})$ | Total $\text{Hg}$ on $\text{C}_{18}$ complex | `-7441.141316` |
+| **$E_{\text{binding}}$** | **Calculated Binding Energy ($\text{Hg@C}_{18}$)** | **`0.6002 eV`** |
  
