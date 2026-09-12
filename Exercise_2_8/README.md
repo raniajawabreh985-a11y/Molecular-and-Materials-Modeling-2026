@@ -30,6 +30,10 @@ $$\text{Binding Energy} = E(\text{C}_8) + E(\text{H}) - E(\text{H@C}_8)$$
 | $E(\text{H@C}_8)$ | Total combined adsorption system | `-1319.069282` |
 | **$E_{\text{binding}}$** | **Calculated Binding Energy** | **`17.5679 eV`** |
 
+* **Execution:**
+  ```bash
+  python3 run_adsorption.py
+
 ---
 
 ### 2. Challenge 1: Geometry Optimization of $\text{C}_8$ Substrate
@@ -40,6 +44,10 @@ Optimized the atomic positions of the isolated $\text{C}_8$ slab using the BFGS 
 | :--- | :---: |
 | **Relaxed $E(\text{C}_8)$** | `-1288.937073 eV` |
 | **Updated Binding Energy** | **`17.5727 eV`** |
+
+* **Execution:**
+  ```bash
+  python3 relaxation_c.py
 
 ---
 
@@ -54,6 +62,10 @@ Evaluated energy convergence by increasing the wave-function kinetic energy cuto
 | $E(\text{H@C}_8)$ | `-1313.276897` |
 | **New Binding Energy** | **`2.8933 eV`** |
 
+* **Execution:**
+  ```bash
+  python3 test_ecut.py
+
 ---
 
 ### 4. Challenge 3: Mercury ($\text{Hg}$) Adsorption on $\text{C}_{18}$ Substrate
@@ -66,4 +78,9 @@ Extended the adsorption study to a larger $\text{C}_{18}$ graphene supercell int
 | $E(\text{Hg})$ | Isolated Mercury atom | `-4525.061570` |
 | $E(\text{Hg@C}_{18})$ | Total $\text{Hg}$ on $\text{C}_{18}$ complex | `-7441.141316` |
 | **$E_{\text{binding}}$** | **Calculated Binding Energy ($\text{Hg@C}_{18}$)** | **`0.6002 eV`** |
+
+* **Execution:**
+  ```bash
+  python3 run_c18.py
+  python3 run_hg.py
  
