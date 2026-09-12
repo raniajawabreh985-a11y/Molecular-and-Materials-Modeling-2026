@@ -7,28 +7,29 @@ Calculation of the electrostatic potential profile and determination of the work
 | Parameter | Value |
 | :--- | :--- |
 | **System** | Monolayer Graphene Slab |
-| **Plane-wave cutoff (ecutwfc)** | 40 Ry |
-| **Charge density cutoff (ecutrho)** | 320 Ry |
-| **K-point mesh** | $12 \times 12 \times 1$ |
-| **Vacuum Spacing** | ~15 Å ($z$-axis) |
+| **Plane-wave Cutoff (`ecutwfc`)** | $40\text{ Ry}$ |
+| **Charge Density Cutoff (`ecutrho`)** | $320\text{ Ry}$ |
+| **K-point Mesh** | $12 \times 12 \times 1$ |
+| **Vacuum Spacing** | $\sim 15\text{ \AA}$ ($z\text{-axis}$) |
 
-## Results
-
-### Key Energy Levels
-| Parameter | Value (eV) |
+## Execution Commands
+| Step | Tool / Command |
 | :--- | :--- |
-| **Fermi Energy ($E_{Fermi}$)** | -1.717400 |
-| **Vacuum Potential ($V_{vacuum}$)** | 0.185449 |
-| **Calculated Work Function ($WF$)** | **1.902849** |
+| **1. Main Script Execution** | `python3 work_function.py > work_function.out` |
+| **2. SCF Calculation** | `mpirun -np 2 /home/user/miniconda3/bin/pw.x -in espresso.pwi > espresso.pwo` |
+| **3. Extract Potential Grid** | `/home/user/miniconda3/bin/pp.x < pp.in > pp.out 2>&1` |
+| **4. Planar Averaging** | `/home/user/miniconda3/bin/average.x < average.in > average.out 2>&1` |
 
-## Formula
-$$\text{Work Function} (WF) = V_{\text{vacuum}} - E_{\text{Fermi}}$$
+## Results & Values
+| Quantity | Calculated Value | Reference / Standard |
+| :--- | :--- | :--- |
+| **Fermi Level ($E_F$)** | $-1.7174\text{ eV}$ | — |
+| **Vacuum Potential ($V_{\text{vacuum}}$)** | $+2.5230\text{ eV}$ ($0.18545\text{ Ry}$) | — |
+| **Work Function ($WF = V_{\text{vacuum}} - E_F$)** | $\mathbf{4.24\text{ eV}}$ | $4.56 \pm 0.10\text{ eV}$ |
 
-$$\text{Work Function} = 0.185449 - (-1.717400) = 1.902849 \text{ eV}$$
-
-## Output Plot
-The planar-averaged electrostatic potential distribution across the $z$-axis is saved in `potential_plot.png`.
-
-## Execution
-```bash
-python3 work_function.py > work_function.out
+## Output Artifacts
+| File / Path | Description |
+| :--- | :--- |
+| `potential_plot.png` | Planar and macroscopic average of the electrostatic potential along the $z$-direction |
+| `potential_results/avg.dat` | Data file containing planar-averaged potential values |
+| `potential_results/electrostatic_potential` | 3D real-space electrostatic potential grid |
