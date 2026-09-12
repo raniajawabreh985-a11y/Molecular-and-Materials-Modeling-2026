@@ -36,7 +36,7 @@ $$\text{Binding Energy} = E(\text{C}_8) + E(\text{H}) - E(\text{H@C}_8)$$
 
 ---
 
-### 2. Challenge 1: Geometry Optimization of $\text{C}_8$ Substrate
+### 2. Challenge 1: Relaxation of $\text{C}_8$ Substrate
 
 Optimized the atomic positions of the isolated $\text{C}_8$ slab using the BFGS algorithm ($f_{\text{max}} < 0.05\text{ eV/\AA}$).
 
