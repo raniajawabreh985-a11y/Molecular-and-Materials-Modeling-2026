@@ -46,3 +46,13 @@ This report documents the energy cutoff convergence, constrained cell relaxation
 * **Dirac Cone Formation:** The electronic states near the Fermi level ($E_F = 0\text{ eV}$) are overwhelmingly dominated by out-of-plane $p_z$ orbitals.
 * **Orbital Projection:** The in-plane orbitals ($p_x + p_y$) form strong $\sigma$-bonds situated deep in the valence band, leaving the $\pi$-bands ($p_z$) to form the characteristic Dirac cones at the $K$-point.
 * **Plot Reference:** The generated figure (`graphene_pdos_final.png`) illustrates the clear dominance of $p_z$ orbitals over $p_x + p_y$ at the Fermi level.
+
+  ---
+
+## 4. Comparison with Silicon (Si) $p$-orbitals
+* **Graphene (2D):** Shows a strong orbital anisotropy. The out-of-plane $p_z$ orbitals dominate near the Fermi level ($E_F$), forming the zero-gap Dirac cone due to $sp^2$ hybridization and pure $\pi$-bonding.
+* **Silicon (3D Bulk):** Exhibits $sp^3$ hybridization where $p_x$, $p_y$, and $p_z$ orbitals contribute symmetrically to the valence and conduction bands, resulting in a distinct energy band gap rather than a Dirac point.
+
+---
+
+
