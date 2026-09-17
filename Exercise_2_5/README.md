@@ -12,16 +12,18 @@ Calculation of the electronic structure and Density of States (DOS) for Bulk Alu
 * **Structure:** Bulk Aluminium (FCC, $a = 4.05\text{ \AA}$)
 * **Pseudopotential:** `Al.pz-vbc.UPF`
 * **Exchange-Correlation Functional:** LDA
-* **K-points Mesh:** $8 \times 8 \times 8$
+* **K-points Mesh:** 8 × 8 × 8
 * **Wavefunction Cutoff ($e_{\text{cutwfc}}$):** 30.0 Ry
 * **Smearing:** Marzari-Vanderbilt ($0.02\text{ Ry}$)
 
 ## Results
+
 * **Total Energy:** `-56.986773 eV`
 * **Fermi Energy ($E_F$):** `7.627100 eV`
 * **DOS Plot:** Computed and generated successfully as `al_dos_plot.png`.
 
 ### Density of States (DOS) Plot
+
 ![Aluminium DOS Plot](al_dos_plot.png)
 
 ## Execution & How to Run
