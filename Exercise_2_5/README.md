@@ -24,7 +24,7 @@ Calculation of the electronic structure and Density of States (DOS) for Bulk Alu
 
 ### Density of States (DOS) Plot
 
-![Aluminium DOS Plot](total20%dos.png)
+![Aluminium DOS Plot](total_dos.png)
 
 ## Execution & How to Run
 
