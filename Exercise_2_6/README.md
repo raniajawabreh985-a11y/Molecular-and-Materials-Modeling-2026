@@ -1,7 +1,7 @@
 # TASK 6: Surfaces and 2D Materials (Graphene)
 
 ## Overview
-This report documents the structural relaxation, electronic properties, and Projected Density of States (PDOS) calculations for monolayer graphene using Quantum ESPRESSO via the ASE Python interface.
+This report documents the energy cutoff convergence, constrained cell relaxation, electronic properties, and Projected Density of States (PDOS) analysis for monolayer graphene using Quantum ESPRESSO via the ASE Python interface.
 
 ---
 
@@ -26,14 +26,23 @@ This report documents the structural relaxation, electronic properties, and Proj
 
 ## 2. Constrained Cell Relaxation
 * **Constraint:** Fixed out-of-plane vector ($zz$) and cell angles ($yz, xz, xy$) using `UnitCellFilter(mask=[True, True, False, False, False, False])`.
-* **Execution:** Relaxed in-plane lattice constants ($xx, yy$) to optimize graphene bonding geometry while maintaining $15\text{ \AA}$ vacuum spacing.
+
+### Final Relaxation Results
+* **Total Energy:** $-327.522044\text{ eV}$
+* **ASE Max Force (norm):** $0.000387\text{ eV/\AA}$
+* **QE Max Force:** $0.000000\text{ eV/\AA}$
+* **Pressure:** $0.072081\text{ kbar}$
+* **Output Structure:** Saved to `final_relaxed_structure.vasp`
 
 ---
 
 ## 3. Electronic Properties & PDOS Analysis
-* **Fermi Level:** $-4.2408\text{ eV}$
-* **PDOS vs TDOS Integration Agreement:** $< 1\%$ difference (excellent agreement).
+* **Fermi Level ($E_F$):** $-4.2408\text{ eV}$
+* **Integrated TDOS:** $6.8057\text{ states}$
+* **Integrated Sum of PDOS:** $6.7393\text{ states}$
+* **Relative Difference:** $0.97\%$ (Excellent agreement $<5\%$)
 
-### Key Scientific Findings
-* **Dirac Cone Formation:** The electronic states near the Fermi level ($E_F$) are overwhelmingly dominated by out-of-plane $p_z$ orbitals.
-* **Orbital Projection:** The in-plane orbitals ($p_x + p_y$) form strong $\sigma$-bonds situated deep in the valence band, leaving the $\pi$-bands ($p_z$) to meet at the Dirac point.
+### Key Scientific Findings & Plot
+* **Dirac Cone Formation:** The electronic states near the Fermi level ($E_F = 0\text{ eV}$) are overwhelmingly dominated by out-of-plane $p_z$ orbitals.
+* **Orbital Projection:** The in-plane orbitals ($p_x + p_y$) form strong $\sigma$-bonds situated deep in the valence band, leaving the $\pi$-bands ($p_z$) to form the characteristic Dirac cones at the $K$-point.
+* **Plot Reference:** The generated figure (`graphene_pdos_final.png`) illustrates the clear dominance of $p_z$ orbitals over $p_x + p_y$ at the Fermi level.
