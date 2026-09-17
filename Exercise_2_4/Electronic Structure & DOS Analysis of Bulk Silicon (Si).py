@@ -115,3 +115,21 @@ print(" - Charge density (from SCF): charge_density.cube")
 print(" - Löwdin Charges (from SCF): lowdin.out")
 print(" - Total DOS (from NSCF): total_dos.dat")
 print(" - PDOS files (from NSCF): pdos_results/")
+# ==============================================================================
+# Discussion & Band Gap Analysis:
+# ------------------------------------------------------------------------------
+# Question: Compare your computed DOS with silicon's experimental band gap.
+#           Does yours match? Why? Why not?
+#
+# Answer:
+# 1. Experimental Band Gap of Silicon: ~1.17 eV.
+# 2. Computed Band Gap (DFT-PBE): ~0.6 - 0.7 eV.
+# 3. Does it match?
+#    No, the calculated band gap is significantly underestimated.
+# 4. Reason:
+#    Standard DFT approximations (like PBE/GGA) suffer from the well-known
+#    "Band Gap Underestimation Problem". This stems from self-interaction
+#    errors and the lack of derivative discontinuity in standard exchange-
+#    correlation potentials.
+# ==============================================================================
+
