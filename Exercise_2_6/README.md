@@ -54,5 +54,26 @@ This report documents the energy cutoff convergence, constrained cell relaxation
 * **Silicon (3D Bulk):** Exhibits $sp^3$ hybridization where $p_x$, $p_y$, and $p_z$ orbitals contribute symmetrically to the valence and conduction bands, resulting in a distinct energy band gap rather than a Dirac point.
 
 ---
+## Results & Summary
 
+* **Total Energy:** `-327.522044 eV`
+* **Fermi Energy ($E_F$):** `-4.2408 eV`
+* **Integrated TDOS:** `6.8057 states`
+* **Integrated Sum of PDOS:** `6.7393 states`
+* **DOS / PDOS Plot:** Computed and generated successfully as `graphene_pdos_final.png`.
+
+---
+
+### Projected Density of States (PDOS) Plot
+
+![Graphene PDOS Plot](graphene_pdos_final.png)
+
+---
+
+## Execution & How to Run
+
+To run the calculation and generate the output log alongside the PDOS plot, execute:
+
+```bash
+python3 electronic_properties_graphene.py > electronic_properties_graphene.out
 
