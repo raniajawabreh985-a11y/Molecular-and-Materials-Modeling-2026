@@ -1,76 +1,59 @@
+import os
 import numpy as np
 from ase.build import graphene
 from ase.calculators.espresso import Espresso
 
-# 1. Structure Setup: Monolayer Graphene
-atoms = graphene(formula='C2', vacuum=10.0)
+# Create Monolayer Graphene with 15 Angstrom vacuum along z-axis
+atoms = graphene(symbol='C', latticeconstant={'a': 2.46, 'c': 15.0})
+atoms.center(vacuum=7.5, axis=2)
 
-# 2. Convergence Test Setup for ecutwfc
 ecutwfc_list = [20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0, 55.0]
-kpts_grid = (39, 39, 1)
+kpts = (39, 39, 1)
 
-# Pseudopotential mapping (adjust filename based on your system)
-pseudopotentials = {'C': 'C.pbe-n-kjpaw_psl.1.0.0.UPF'}
+print(f"Starting ecutwfc convergence test for Graphene with k-point grid {kpts}...")
+print(f"{'ecutwfc (Ry)':<15}{'Energy (eV)':<20}{'dE (meV/atom)':<20}")
+print("-" * 55)
 
-energies = []
-
-print("Starting convergence tests...\n" + "=" * 50)
-print(f"1. Testing ecutwfc convergence with k-point grid {kpts_grid} :\n" + "-" * 50)
-print(f"{'ecutwfc (Ry)':<12} {'Energy (eV)':<15} {'ΔE (meV/atom)':<15}")
-print("-" * 50)
-
-# 3. Execution Loop
 prev_energy = None
+results = []
 
 for ecut in ecutwfc_list:
-    input_data = {
-        'control': {
-            'calculation': 'scf',
-            'restart_mode': 'from_scratch',
-            'prefix': 'graphene_ecut',
-            'outdir': './out',
-            'tstress': True,
-            'tprnfor': True,
-        },
-        'system': {
-            'ecutwfc': ecut,
-            'occupations': 'smearing',
-            'smearing': 'marzari-vanderbilt',
-            'degauss': 0.02,
-        },
-        'electrons': {
-            'conv_thr': 1.0e-8,
-            'mixing_beta': 0.30,  # Reduced to resolve charge sloshing in 2D graphene
-            'electron_max_step': 100,
-        }
-    }
-
     calc = Espresso(
-        command='mpirun -np 4 pw.x < espresso.pwi > espresso.pwo',
-        pseudopotentials=pseudopotentials,
-        tstress=True,
-        tprnfor=True,
-        kpts=kpts_grid,
-        input_data=input_data
+        command='mpirun -np 4 /home/user/miniconda3/bin/pw.x -in espresso.pwi > espresso.pwo',
+        pseudopotentials={'C': 'C.pbe-n-kjpaw_psl.1.0.0.UPF'},
+        kpts=kpts,
+        input_data={
+            'CONTROL': {
+                'calculation': 'scf',
+                'restart_mode': 'from_scratch',
+                'prefix': 'graphene',
+                'outdir': './tmp',
+            },
+            'SYSTEM': {
+                'ecutwfc': ecut,
+                'assume_isolated': '2D',
+                'occupations': 'smearing',
+                'smearing': 'mv',
+                'degauss': 0.01,
+            },
+            'ELECTRONS': {
+                'conv_thr': 1.0e-8,
+                'electron_max_step': 100,
+            },
+        },
     )
-
     atoms.calc = calc
-    
-    # Calculate potential energy
     energy = atoms.get_potential_energy()
-    energies.append(energy)
+    num_atoms = len(atoms)
 
-    # Calculate Delta E per atom (Graphene unit cell has 2 C atoms)
-    if prev_energy is None:
-        delta_e_str = "."
+    if prev_energy is not None:
+        de_per_atom = abs(energy - prev_energy) / num_atoms * 1000.0
+        de_str = f"{de_per_atom:.3f}"
     else:
-        delta_e = ((energy - prev_energy) / len(atoms)) * 1000.0  # in meV/atom
-        delta_e_str = f"{delta_e:.3f}"
+        de_str = "-"
 
-    print(f"{ecut:<12.1f} {energy:<15.6f} {delta_e_str:<15}")
+    print(f"{ecut:<15.1f}{energy:<20.6f}{de_str:<20}")
     prev_energy = energy
-
-print("-" * 50)
 
 print("-" * 48)
 print(f"Linear Thermal Expansion Coefficient (alpha): {alpha_val:.3e} K^-1")
