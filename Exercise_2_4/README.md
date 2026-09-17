@@ -19,7 +19,7 @@ This repository contains the full Quantum ESPRESSO computational workflow for Si
 
 * `README.md`: Document detailing exercise overview, methodology, and computational results.
 * `electronic_properties_silicon.py`: Primary Python script executing SCF, DOS, and PDOS calculations via Quantum ESPRESSO and ASE.
-* `si_dos_plot.png`: Graphical output illustrating total and projected density of states.
+* `total_dos.png`: Graphical output illustrating total and projected density of states.
 
 ### 3. Comparison with Experimental Band Gap
 * **Computed Band Gap:** ~0.6–0.7 eV (calculated from DOS/NSCF eigenvalues).
