@@ -1,40 +1,39 @@
-# Exercise II.6: Energy Cutoff (`ecutwfc`) Convergence for Graphene
+# TASK 6: Surfaces and 2D Materials (Graphene)
 
 ## Overview
-This calculation evaluates the total energy convergence of monolayer graphene with respect to the plane-wave wavefunction cutoff energy (`ecutwfc`) using Quantum ESPRESSO via the ASE (Atomic Simulation Environment) Python interface.
+This report documents the structural relaxation, electronic properties, and Projected Density of States (PDOS) calculations for monolayer graphene using Quantum ESPRESSO via the ASE Python interface.
 
+---
+
+## 1. Convergence Test (ecutwfc)
 * **System:** Monolayer Graphene (2D Semi-metal)
 * **k-point Grid:** $39 \times 39 \times 1$
-* **Target Convergence Threshold:** $< 1.0\text{ meV/atom}$
+* **Target Threshold:** $< 1.0\text{ meV/atom}$
 
-  ## Results
-
-### `ecutwfc` Convergence Data
-
-| ecutwfc (Ry) | Total Energy (eV) | $\Delta E$ (meV/atom) | SCF Iterations Status |
+### Convergence Data
+| ecutwfc (Ry) | Total Energy (eV) | $\Delta E$ (meV/atom) | SCF Status |
 | :---: | :---: | :---: | :---: |
 | 20.0 | -497.449269 | - | Converged |
 | 25.0 | -501.132318 | -1841.524 | Converged |
 | 30.0 | -501.755881 | -311.782 | Converged |
 | 35.0 | -501.875806 | -59.962 | Converged |
 | 40.0 | -501.890811 | -7.503 | Converged |
-| **45.0** | **-501.892902** | **-1.045** | **Optimal Threshold** |
+| 45.0 | -501.892902 | -1.045 | Optimal Threshold |
 | 50.0 | -501.895852 | -1.475 | Converged |
 | 55.0 | -501.899650 | -1.899 | Converged |
 
 ---
 
-## Execution & Computational Setup
+## 2. Constrained Cell Relaxation
+* **Constraint:** Fixed out-of-plane vector ($zz$) and cell angles ($yz, xz, xy$) using `UnitCellFilter(mask=[True, True, False, False, False, False])`.
+* **Execution:** Relaxed in-plane lattice constants ($xx, yy$) to optimize graphene bonding geometry while maintaining $15\text{ \AA}$ vacuum spacing.
 
-### SCF Parameters
-* **Quantum ESPRESSO Executable:** `pw.x`
-* **Electronic Mixing Parameter (`mixing_beta`):** Reduced to `0.30` to mitigate charge sloshing typical of zero-gap 2D materials.
-* **Maximum SCF Steps (`electron_max_step`):** 100
-* **Pseudo Potential:** Carbon pseudopotential from standard QE distribution.
+---
 
-### Execution Command
-The convergence calculation script was executed using parallel MPI execution within the virtual Linux workstation environment:
+## 3. Electronic Properties & PDOS Analysis
+* **Fermi Level:** $-4.2408\text{ eV}$
+* **PDOS vs TDOS Integration Agreement:** $< 1\%$ difference (excellent agreement).
 
-```bash
-mpirun -np 4 pw.x -in espresso.pwi > espresso.pwo
-python3 convergence_test_graphene.py
+### Key Scientific Findings
+* **Dirac Cone Formation:** The electronic states near the Fermi level ($E_F$) are overwhelmingly dominated by out-of-plane $p_z$ orbitals.
+* **Orbital Projection:** The in-plane orbitals ($p_x + p_y$) form strong $\sigma$-bonds situated deep in the valence band, leaving the $\pi$-bands ($p_z$) to meet at the Dirac point.
