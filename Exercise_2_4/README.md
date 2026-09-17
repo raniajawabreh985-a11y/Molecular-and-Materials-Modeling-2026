@@ -13,7 +13,7 @@ This repository contains the full Quantum ESPRESSO computational workflow for Si
 
 ### Electronic Density of States (DOS/PDOS) Plot
 
-![Silicon Electronic Properties and DOS](si_dos_plot.png)
+![Silicon Electronic Properties and DOS](total_dos.png)
 
 ## 2. Generated Output Files
 
