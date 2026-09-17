@@ -60,3 +60,5 @@ print(f"Linear Thermal Expansion Coefficient (alpha): {alpha_val:.3e} K^-1")
 EOF
 
 python3 thermal_expansion_calc.py
+
+
