@@ -1,59 +1,70 @@
 #!/usr/bin/env python3
 """
-Exercise II.3: Surface Formation & Adsorption Energy Analysis
-Calculates:
-1. Surface Formation Energy (gamma) in J/m^2
-2. Adsorption Binding Energy (E_ad) in eV
+Task 3: Cell Relaxation for Silicon using Quantum ESPRESSO and ASE
 """
 
-# Units Conversion Factor
-RY_TO_EV = 13.605698066
-EV_TO_JOULE = 1.602176634e-19
-ANGSTROM2_TO_M2 = 1.0e-20
+from ase.io import read, write
+from ase.calculators.espresso import Espresso, EspressoProfile
+from ase.optimize import BFGS
 
-# ---------------------------------------------------------
-# Calculated / Simulated Energies (in Ry)
-# ---------------------------------------------------------
-E_bulk_per_atom = -16.92527473 / 2.0  # Bulk energy per Si/Au atom in Ry
+# 1. Structure Initialization
+atoms = read('cell_relaxation_si.in', format='espresso-in')
 
-# Surface Slab Parameters
-E_slab = -135.201452      # Total energy of relaxed Au(111) slab (Ry)
-N_atoms_slab = 8          # Number of atoms in the slab
-Area_angstrom2 = 32.45    # Surface cross-sectional area (A^2)
+# 2. Calculator Configuration
+# Update the binary path to your local Quantum ESPRESSO executable
+qe_profile = EspressoProfile(
+    command='/home/user/miniconda3/bin/pw.x -in PREFIX.pwi > PREFIX.pwo'
+)
 
-# Adsorption Parameters
-E_molecule = -1.152431    # Energy of the isolated molecule in vacuum (Ry)
-E_system = -136.397223    # Total energy of Slab + Molecule system (Ry)
+input_data = {
+    'control': {
+        'calculation': 'vc-relax',
+        'restart_mode': 'from_scratch',
+        'pseudo_dir': './',
+        'outdir': './tmp',
+        'etot_conv_thr': 1.0e-4,
+        'forc_conv_thr': 1.0e-3,
+    },
+    'system': {
+        'ecutwfc': 30.0,
+        'ibrav': 2,
+        'celldm(1)': 10.26,
+    },
+    'electrons': {
+        'conv_thr': 1.0e-8,
+        'mixing_beta': 0.7,
+    },
+    'ions': {
+        'ion_dynamics': 'bfgs',
+    },
+    'cell': {
+        'cell_dynamics': 'bfgs',
+    }
+}
 
-# ---------------------------------------------------------
-# 1. Surface Formation Energy Calculation (gamma)
-# ---------------------------------------------------------
-# Formula: gamma = (E_slab - N * E_bulk) / (2 * Area)
-E_surface_unscaled_Ry = E_slab - (N_atoms_slab * E_bulk_per_atom)
-E_surface_eV = E_surface_unscaled_Ry * RY_TO_EV
-E_surface_Joules = E_surface_eV * EV_TO_JOULE
+pseudopotentials = {
+    'Si': 'Si.pbe-n-kjpaw_psl.1.0.0.UPF'
+}
 
-Area_m2 = Area_angstrom2 * ANGSTROM2_TO_M2
-gamma = E_surface_Joules / (2.0 * Area_m2)  # J/m^2
+calc = Espresso(
+    profile=qe_profile,
+    input_data=input_data,
+    pseudopotentials=pseudopotentials,
+    kpts=(4, 4, 4),
+    koffset=(0, 0, 0)
+)
 
-# ---------------------------------------------------------
-# 2. Adsorption Binding Energy Calculation (E_ad)
-# ---------------------------------------------------------
-# Formula: E_ad = E_system - (E_slab + E_molecule)
-E_ad_Ry = E_system - (E_slab + E_molecule)
-E_ad_eV = E_ad_Ry * RY_TO_EV
+atoms.calc = calc
 
-# ---------------------------------------------------------
-# Print Results
-# ---------------------------------------------------------
-print("=" * 50)
-print(" EXERCISE II.3: CALCULATION RESULTS")
-print("=" * 50)
-print(f"Surface Formation Energy (gamma) : {gamma:.4f} J/m^2")
-print(f"Adsorption Binding Energy (E_ad) : {E_ad_eV:.4f} eV")
-print("=" * 50)
-print(f"{'Surface Energy (J/m^2)':<30} | {gamma:<15.4f}")
-print(f"{'Adsorption Energy (eV)':<30} | {e_ad:<15.4f}")
-EOF
+# 3. Execution using ASE Optimizer
+dyn = BFGS(atoms, trajectory='relaxation.traj')
+dyn.run(fmax=0.05)
 
-python3 surface_adsorption_calc.py
+# 4. Final Output Processing
+final_energy = atoms.get_total_energy()
+forces = atoms.get_forces()
+
+print(f"Final Total Energy: {final_energy:.6f} eV")
+print(f"Max Force: {abs(forces).max():.6f} eV/Angstrom")
+
+write('final_relaxed_structure.vasp', atoms, format='vasp')
