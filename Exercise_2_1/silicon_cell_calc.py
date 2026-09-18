@@ -59,6 +59,17 @@ except Exception as e:
     print(f"Execution Error: {e}")
 for a_val, energy in data:
     print(f"{a_val:<22.3f} | {energy:<20.4f}")
+
+try:
+    energy = atoms.get_potential_energy()
+    print("=" * 45)
+    print("Lattice constant (a) : 5.43 Angstrom")
+    print("Pseudopotential      : Si.upf")
+    print("Total Energy         : {energy:.6f} eV")
+    print("=" * 45)
+except Exception as e:
+    print(f"Execution Error: {e}")
+    
 EOF
 
-python3 silicon_cell_calc.py
+python3 si_ase.py
