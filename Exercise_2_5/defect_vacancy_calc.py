@@ -102,8 +102,8 @@ plt.grid(True, linestyle=':', alpha=0.6)
 plt.tight_layout()
 
 # Save the plot
-plt.savefig('al_dos_plot.png', dpi=300)
-print("DOS plot successfully saved as 'al_dos_plot.png'")
+plt.savefig('total_dos.png.png', dpi=300)
+print("DOS plot successfully saved as 'total_dos.png.png'")
 print("-" * 52)
 print(f"{'Single Vacancy (V)':<25} | {e_vacancy:<22.4f}")
 EOF
