@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Exercise II.1: Total Energy Calculation of the Silicon Unit Cell
-Calculates the total energy of Si bulk using Quantum ESPRESSO via ASE.
+Exercise II.1: Total Energy Calculation of the Silicon Unit Cell.
+
 """
 
 import sys
