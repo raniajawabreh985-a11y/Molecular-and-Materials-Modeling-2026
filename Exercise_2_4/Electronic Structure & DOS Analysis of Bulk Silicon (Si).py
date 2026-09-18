@@ -107,7 +107,7 @@ plt.grid(True, linestyle=':', alpha=0.6)
 plt.tight_layout()
 
 # Save image file matching the README reference
-plot_filename = 'si_dos_plot.png'
+plot_filename = 'total_dos.png'
 plt.savefig(plot_filename, dpi=300)
 print(f"DOS plot successfully generated and saved as '{plot_filename}'.")
 print("Generated files:")
