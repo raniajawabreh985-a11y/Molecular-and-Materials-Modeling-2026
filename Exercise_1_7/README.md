@@ -74,6 +74,8 @@ calc = Espresso(
 ch4.calc = calc
 
 dyn = BFGS(ch4, trajectory='ch4_opt.traj', logfile='ch4_opt.log')
+
+Optimization Results for $\text{CH}_4$:Final Total Energy: -315.6488 eVC-H Bond Length: 1.0964 Å (Experimental: $\approx 1.087\text{ \AA}$)H-C-H Angle: 109.47° (Ideal Tetrahedral Angle: $\approx 109.47^\circ$)
 dyn.run(fmax=0.05)
 
 print("\n=== Optimized Methane (CH4) Results ===")
