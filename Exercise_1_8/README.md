@@ -18,18 +18,13 @@ This repository contains the computational workflow and geometry optimization st
 ```bash
 python3 run_mace.py
 
-Step 2: NWChem DFT Optimization
 
 export NWCHEM_BASIS_LIBRARY=$CONDA_PREFIX/share/nwchem/libraries/
 nwchem UO2I2_nwchem.nw > run_nwchem.out
-
-Step 3: Extracting Final XYZ Coordinates
 
 sed -n '11848,11858p' run_nwchem.out | awk '{printf "%-3s %12.6f %12.6f %12.6f\n", $2, $4, $5, $6}' > coords.tmp
 echo -e "11\nUO2I2(OH2)2 DFT Optimized Structure" > UO2I2_dft_optimized.xyz
 cat coords.tmp >> UO2I2_dft_optimized.xyz
 rm coords.tmp
-
-Structure Visualization
 
 pymol UO2I2_dft_optimized.xyz
