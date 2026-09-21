@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
 Exercise I.6 & Challenge I.6: Bond Energy Calculations
-Author: Rania
 Script to compute C-C bond energy in ethane and C-H bond energy in methane using ASE and EMT.
 """
 
