@@ -20,6 +20,10 @@ Quantitative comparison of bond energies calculated using the Atomic Simulation 
 ## Execution
 
 ```bash
+python3 ethane_CH_bond_en.py
+
+```bash
 python3 methane_CH_bond_en.py
+
 
 
